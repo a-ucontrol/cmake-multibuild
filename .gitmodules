@@ -1,0 +1,3 @@
+[submodule "AsyncFw"]
+	path = AsyncFw
+	url = https://github.com/a-ucontrol/AsyncFw.git
