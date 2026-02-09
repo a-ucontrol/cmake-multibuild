@@ -31,7 +31,10 @@ add_custom_target(project-related-files SOURCES
   )
 
 if(MULTIBUILD_TARGET)
+  set(EXAMPLES_PATH ${MULTIBUILD_BINARY_DIR}/${MULTIBUILD_PROJECT_NAME}/${MULTIBUILD_TARGET}/example/)
   add_subdirectory(../AsyncFw ${MULTIBUILD_BINARY_DIR}/${MULTIBUILD_PROJECT_NAME}/${MULTIBUILD_TARGET})
+elseif(MULTIBUILD_MAIN)
+  add_subdirectory(../AsyncFw ${MULTIBUILD_BINARY_DIR}/${MULTIBUILD_PROJECT_NAME}/${MULTIBUILD_TARGET} EXCLUDE_FROM_ALL)
 endif()
 
 #set(PROJECT_SOURCES
@@ -62,7 +65,7 @@ endif()
 
 if(MULTIBUILD_MAIN)
   add_dependencies(${MULTIBUILD_PROJECT_NAME}-final ${MULTIBUILD_PROJECT_NAME}-multibuild-all)
-  add_custom_target(${MULTIBUILD_PROJECT_NAME} SOURCES ${PROJECT_SOURCES})
+#  add_custom_target(${MULTIBUILD_PROJECT_NAME} SOURCES ${PROJECT_SOURCES})
   return()
 endif()
 
