@@ -14,12 +14,10 @@ if(NOT MULTIBUILD_BINARY_DIR)
 endif()
 
 if (MULTIBUILD)
-#https://cristianadam.eu/20191012/building-multiple-configurations-with-cmake-in-one-go/
-
   if(NOT MULTIBUILD_TARGET_LIST)
     set(MULTIBUILD_TARGET_LIST
-    "x86_64,_,-DPLATFORM=x86_64"
-    "arm,_,-DPLATFORM=arm"
+    "release|_|-DCMAKE_BUILD_TYPE=Release"
+    "debug|_|-DCMAKE_BUILD_TYPE=Debug"
     )
   endif()
 
@@ -41,9 +39,9 @@ if (MULTIBUILD)
     message("Processor count for target: " ${PC})
   endif()
   include(ExternalProject)
-  macro (target_setup target_name target_cmake_commanda target_cmake_args)
-    if(NOT ${target_cmake_commanda} STREQUAL _)
-      set(MULTIBUILD_CMAKE_COMMAND ${target_cmake_commanda})
+  macro (target_setup target_name target_cmake_command target_cmake_args)
+    if(NOT ${target_cmake_command} STREQUAL _)
+      set(MULTIBUILD_CMAKE_COMMAND ${target_cmake_command})
     else()
       set(MULTIBUILD_CMAKE_COMMAND ${CMAKE_COMMAND})
     endif()
@@ -68,8 +66,8 @@ if (MULTIBUILD)
   endmacro()
 
   foreach(T ${MULTIBUILD_TARGET_LIST})
-    #message(${T})
-    string (REPLACE "," ";" A "${T}")
+    message(${T})
+    string (REPLACE "|" ";" A "${T}")
     target_setup(${A})
   endforeach()
 
@@ -77,6 +75,6 @@ if (MULTIBUILD)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR} ${MULTIBUILD_PROJECT_NAME}-main)
 
   if(TARGET ${MULTIBUILD_PROJECT_NAME})
-    set_target_properties(${MULTIBUILD_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES ${CLEAN_DIRS})
+    set_target_properties(${MULTIBUILD_PROJECT_NAME} PROPERTIES ADDITIONAL_CLEAN_FILES ${CLEAN_DIRS}\;${MULTIBUILD_BINARY_DIR}/${MULTIBUILD_PROJECT_NAME})
   endif()
 endif()
