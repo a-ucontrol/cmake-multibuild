@@ -16,8 +16,8 @@ endif()
 if (MULTIBUILD)
   if(NOT MULTIBUILD_TARGET_LIST)
     set(MULTIBUILD_TARGET_LIST
+#      "name||CMAKE_COMMAND or _||CMAKE_ARGS"
       "release||_||-DCMAKE_BUILD_TYPE=MinSizeRel"
-      "debug||_||-DCMAKE_BUILD_TYPE=Debug"
       "san||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=address,undefined"
     )
   endif()
