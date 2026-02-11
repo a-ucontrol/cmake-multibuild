@@ -5,8 +5,11 @@ if(MULTIBUILD)
   set(MULTIBUILD_TARGET_LIST
     "release||_||-DCMAKE_BUILD_TYPE=MinSizeRel|-DCMAKE_CXX_FLAGS=-DLS_NO_TRACE -DLS_NO_DEBUG"
     "release_shared||_||-DCMAKE_BUILD_TYPE=MinSizeRel|-DCMAKE_CXX_FLAGS=-DLS_NO_TRACE -DLS_NO_DEBUG|-DBUILD_SHARED_LIBS=ON"
+    "release_shared_lto||_||-DCMAKE_BUILD_TYPE=MinSizeRel|-DCMAKE_CXX_FLAGS=-DLS_NO_TRACE -DLS_NO_DEBUG|-DBUILD_SHARED_LIBS=ON|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
     "debug||_||-DCMAKE_BUILD_TYPE=Debug"
     "san||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=address,undefined"
     "tsan||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread"
+    "clang_san||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
+    "clang_tsan||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
   )
 endif()
