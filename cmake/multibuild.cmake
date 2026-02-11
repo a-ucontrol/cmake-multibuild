@@ -10,14 +10,15 @@ endif()
 
 if(NOT MULTIBUILD_BINARY_DIR)
   set(MULTIBUILD_BINARY_DIR ${CMAKE_BINARY_DIR})
-  message("multibuild binary dir: ${MULTIBUILD_BINARY_DIR}")
+  message("Multibuild binary dir: ${MULTIBUILD_BINARY_DIR}")
 endif()
 
 if (MULTIBUILD)
   if(NOT MULTIBUILD_TARGET_LIST)
     set(MULTIBUILD_TARGET_LIST
-    "release|_|-DCMAKE_BUILD_TYPE=Release"
-    "debug|_|-DCMAKE_BUILD_TYPE=Debug"
+      "release||_||-DCMAKE_BUILD_TYPE=MinSizeRel"
+      "debug||_||-DCMAKE_BUILD_TYPE=Debug"
+      "san||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=address,undefined"
     )
   endif()
 
@@ -47,13 +48,13 @@ if (MULTIBUILD)
     endif()
     if(NOT target_cmake_args STREQUAL _)
       foreach(T ${target_cmake_args})
-        string (REPLACE " " ";" A "${T}")
+        string (REPLACE "|" ";" A "${T}")
       endforeach()
      set(MULTIBUILD_CMAKE_ARGS ${A})
     endif()
     ExternalProject_Add(${MULTIBUILD_PROJECT_NAME}-${target_name}
       SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}"
-      CMAKE_ARGS -DMULTIBUILD_TARGET=${target_name} ${MULTIBUILD_CMAKE_ARGS} -DMULTIBUILD_BINARY_DIR=${MULTIBUILD_BINARY_DIR} -DMULTIBUILD_VERSION=${MULTIBUILD_VERSION}
+      CMAKE_ARGS -DMULTIBUILD_TARGET=${target_name} ${MULTIBUILD_CMAKE_ARGS} -DMULTIBUILD_BINARY_DIR=${MULTIBUILD_BINARY_DIR}
       CMAKE_COMMAND ${MULTIBUILD_CMAKE_COMMAND}
       BUILD_COMMAND ${MULTIBUILD_CMAKE_COMMAND} --build . ${BUILD_FLAGS}
       INSTALL_COMMAND ""
@@ -67,7 +68,7 @@ if (MULTIBUILD)
 
   foreach(T ${MULTIBUILD_TARGET_LIST})
     message(${T})
-    string (REPLACE "|" ";" A "${T}")
+    string (REPLACE "||" ";" A "${T}")
     target_setup(${A})
   endforeach()
 
