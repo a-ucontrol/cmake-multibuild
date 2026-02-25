@@ -9,7 +9,9 @@ if(MULTIBUILD)
     "debug||_||-DCMAKE_BUILD_TYPE=Debug"
     "san||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=address,undefined"
     "tsan||_||-DCMAKE_BUILD_TYPE=Debug|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread"
-    "clang_san||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
-    "clang_tsan||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
+    "clang_san||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_SHARED_LINKER_FLAGS=-lstdc++|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
+    "clang_tsan||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang|-DCMAKE_SHARED_LINKER_FLAGS=-lstdc++|-DCMAKE_EXE_LINKER_FLAGS=-lstdc++"
+    "clang_lto_san||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang++|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
+    "clang_lto_tsan||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_CXX_COMPILER=clang++|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
   )
 endif()
