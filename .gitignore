@@ -43,3 +43,4 @@
 CMakeLists.txt.*
 build
 defines.cmake
+log-file-name

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+E=$(find | grep "run-examples/run-examples")
+
+for e in $E ; do
+
+echo $e
+
+$e
+
+done
