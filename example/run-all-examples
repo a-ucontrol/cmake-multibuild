@@ -2,7 +2,7 @@
 
 set -e
 
-E=$(find | grep "run-examples/run-examples")
+E=$(find | grep "example-bin/run-examples")
 
 for e in $E ; do
 
