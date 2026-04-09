@@ -15,6 +15,6 @@ if(MULTIBUILD)
     "clang_san_shared||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_C_FLAGS=-g -fsanitize=address|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_C_COMPILER=clang|-DCMAKE_CXX_COMPILER=clang++"
     "clang_tsan_shared||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_C_FLAGS=-g -fsanitize=thread|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_C_COMPILER=clang|-DCMAKE_CXX_COMPILER=clang++"
     "clang_san_shared_lto||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_C_FLAGS=-g -fsanitize=address|-DCMAKE_CXX_FLAGS=-g -fsanitize=address|-DBUILD_SHARED_LIBS=ON|-DCMAKE_C_COMPILER=clang|-DCMAKE_CXX_COMPILER=clang++|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
-    "clang_san_shared_lto||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_C_FLAGS=-g -fsanitize=thread|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_C_COMPILER=clang|-DCMAKE_CXX_COMPILER=clang++|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
+    "clang_tsan_shared_lto||_||-DCMAKE_BUILD_TYPE=Release|-DCMAKE_C_FLAGS=-g -fsanitize=thread|-DCMAKE_CXX_FLAGS=-g -fsanitize=thread|-DBUILD_SHARED_LIBS=ON|-DCMAKE_C_COMPILER=clang|-DCMAKE_CXX_COMPILER=clang++|-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
   )
 endif()
