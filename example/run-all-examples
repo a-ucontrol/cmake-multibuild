@@ -2,6 +2,7 @@
 
 
 [ "$1" != "" ] && CNT=$1 || CNT=3
+[ "$2" != "" ] && P=$2
 
 
 set -e
@@ -13,9 +14,9 @@ E=$(find | grep "example-bin/run-examples")
 
 for e in $E ; do
 
-echo $e
+echo $e $P
 
-$e
+$e $P
 
 done
 }
