@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+[ "$2" != "" ] && CNT=$2 || CNT=3
+[ "$3" != "" ] && P=$3
+
+
+set -e
+
+
+run() {
+
+E=$(find | grep "example-bin/$1")
+
+for e in $E ; do
+
+echo $e $P
+
+$e $P
+
+done
+}
+
+
+
+while true ; do
+
+cnt=$((cnt + 1))
+
+run $1
+
+[ "$cnt" == "$CNT" ] && break
+
+done
